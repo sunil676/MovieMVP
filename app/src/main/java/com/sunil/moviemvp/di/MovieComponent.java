@@ -1,6 +1,7 @@
 package com.sunil.moviemvp.di;
 
 import com.sunil.moviemvp.MainActivity;
+import com.sunil.moviemvp.ui.PopularMovieFragment;
 
 import dagger.Subcomponent;
 
@@ -11,5 +12,5 @@ import dagger.Subcomponent;
 @MovieScope
 @Subcomponent(modules = MovieModule.class)
 public interface MovieComponent {
-    void inject(MainActivity mainActivity);
+    void inject(PopularMovieFragment popularMovieFragment);
 }

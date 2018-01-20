@@ -26,4 +26,14 @@ public class LocalRepositoryImpl implements LocalRepository{
     public Flowable<List<MovieEntity>> getMovies() {
         return movieDAO.getMovies();
     }
+
+    @Override
+    public void insertMovie(final MovieEntity movieEntity) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                movieDAO.insertMovie(movieEntity);
+            }
+        });
+    }
 }

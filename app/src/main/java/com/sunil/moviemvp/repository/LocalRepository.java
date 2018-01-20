@@ -12,4 +12,5 @@ import io.reactivex.Flowable;
 
 public interface LocalRepository {
     public Flowable<List<MovieEntity>> getMovies();
+    public void insertMovie(MovieEntity movieEntity);
 }

@@ -14,7 +14,7 @@ public class RemoteRepositoryImpl implements RemoteRepository{
     private MovieAPI movieAPI;
 
     public RemoteRepositoryImpl(MovieAPI movieAPI){
-        movieAPI = movieAPI;
+        this.movieAPI = movieAPI;
     }
 
     @Override

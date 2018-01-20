@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class AppModule {
-    public static final String BASE_URL = "http://api.themoviedb.org/3";
+    public static final String BASE_URL = "http://api.themoviedb.org/3/";
 
     @Singleton
     @Provides

@@ -3,6 +3,15 @@ package com.sunil.moviemvp.di;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
+import com.sunil.moviemvp.local.MovieDAO;
+import com.sunil.moviemvp.local.MovieDatabase;
+import com.sunil.moviemvp.remote.MovieAPI;
+import com.sunil.moviemvp.repository.LocalRepository;
+import com.sunil.moviemvp.repository.LocalRepositoryImpl;
+import com.sunil.moviemvp.repository.RemoteRepository;
+import com.sunil.moviemvp.repository.RemoteRepositoryImpl;
+import com.sunil.moviemvp.ui.MoviePresenter;
+
 import java.util.concurrent.Executor;
 
 import javax.inject.Named;
@@ -25,35 +34,37 @@ public class MovieModule {
     }
     @MovieScope
     @Provides
-    public CouponDAO getCouponDAO(CouponDatabase couponDatabase){
-        return couponDatabase.couponDao();
+    public MovieDAO getMovieDAO(MovieDatabase movieDatabase){
+        return movieDatabase.movieDao();
     }
 
     @MovieScope
     @Provides
-    public CouponDatabase getCouponDatabase(){
+    public MovieDatabase getMovieDatabase(){
         return Room.databaseBuilder(context.getApplicationContext(),
-                CouponDatabase.class, "coupons.db")
+                MovieDatabase.class, "movies.db")
                 .build();
     }
     @MovieScope
     @Provides
-    public LocalRepository getLocalRepo(CouponDAO couponDAO, Executor exec){
-        return new LocalRepositoryImpl(couponDAO, exec);
+    public LocalRepository getLocalRepo(MovieDAO movieDAO, Executor exec){
+        return new LocalRepositoryImpl(movieDAO, exec);
     }
     @MovieScope
     @Provides @Named("activity")
     public CompositeDisposable getCompositeDisposable(){
         return new CompositeDisposable();
     }
-    @MovieScope
-    @Provides @Named("vm")
-    public CompositeDisposable getVMCompositeDisposable(){
-        return new CompositeDisposable();
-    }
+
     @MovieScope
     @Provides
-    public RemoteRepository getRemoteRepo(CouponAPI cpnClient){
-        return new RemoteRepositoryImpl(cpnClient);
+    public RemoteRepository getRemoteRepo(MovieAPI movieAPI){
+        return new RemoteRepositoryImpl(movieAPI);
+    }
+
+    @MovieScope
+    @Provides
+    public MoviePresenter getMoviePresenter(LocalRepository localRepository, RemoteRepository remoteRepository){
+        return new MoviePresenter(localRepository, remoteRepository);
     }
 }

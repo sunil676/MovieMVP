@@ -11,5 +11,5 @@ import com.sunil.moviemvp.remote.model.MovieEntity;
 
 @Database(entities = {MovieEntity.class}, version = 1)
 public abstract class MovieDatabase extends RoomDatabase {
-    public abstract MovieDAO couponDao();
+    public abstract MovieDAO movieDao();
 }

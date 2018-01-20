@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MovieMVP</string>
+    <string name="grid_movie_poster">Movie Poster</string>
 </resources>

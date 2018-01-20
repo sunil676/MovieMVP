@@ -12,7 +12,7 @@ import com.sunil.moviemvp.utils.Constant;
  * Created by sunil on 20-01-2018.
  */
 
-@Entity(tableName = "movies")
+@Entity(tableName = "MovieEntity")
 public class MovieEntity implements Parcelable{
 
     @SerializedName("poster_path")
@@ -71,9 +71,60 @@ public class MovieEntity implements Parcelable{
         this.voteAverage = source.readDouble();
     }
 
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
+    }
+
+    public void setAdult(boolean adult) {
+        this.adult = adult;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
+    }
+
+    public void setOriginalLanguage(String originalLanguage) {
+        this.originalLanguage = originalLanguage;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setBackdropPath(String backdropPath) {
+        this.backdropPath = backdropPath;
+    }
+
+    public void setPopularity(double popularity) {
+        this.popularity = popularity;
+    }
+
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
+    }
+
+    public void setVideo(boolean video) {
+        this.video = video;
+    }
+
+    public void setVoteAverage(double voteAverage) {
+        this.voteAverage = voteAverage;
+    }
 
     public String getPosterPath() {
-        return Constant.BASE_URL_IMAGE_POSTER + posterPath;
+        return  posterPath;
     }
 
     public boolean isAdult() {
@@ -105,7 +156,7 @@ public class MovieEntity implements Parcelable{
     }
 
     public String getBackdropPath() {
-        return Constant.BASE_URL_IMAGE_BACKDROP + backdropPath;
+        return backdropPath;
     }
 
     public double getPopularity() {

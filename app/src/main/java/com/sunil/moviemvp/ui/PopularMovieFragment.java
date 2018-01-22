@@ -1,6 +1,7 @@
 package com.sunil.moviemvp.ui;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +9,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -48,6 +52,8 @@ public class PopularMovieFragment extends Fragment implements MovieContract.View
     MoviePresenter moviePresenter;
 
     private String movieType;
+
+    FragmentCommunicator fragmentCommunicator;
 
 
     public static PopularMovieFragment newInstance(String movieType) {
@@ -115,6 +121,7 @@ public class PopularMovieFragment extends Fragment implements MovieContract.View
     public void onLoadMovieOk(List<MovieEntity> movieList) {
         if (movieList!= null){
             // specify an adapter
+            fragmentCommunicator.passDataToFragment(movieList);
             movieGridAdapter = new MovieGridAdapter(getActivity(), movieList, this);
             myRecyclerView.setAdapter(movieGridAdapter);
         }
@@ -146,4 +153,21 @@ public class PopularMovieFragment extends Fragment implements MovieContract.View
         intent.putExtra(Constant.ARG_MOVIE_DETAIL, movieEntity);
         startActivity(intent);
     }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            fragmentCommunicator = (FragmentCommunicator) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement onViewSelected");
+        }
+    }
+
+
+
+    public interface FragmentCommunicator{
+        public void passDataToFragment(List<MovieEntity> movieEntities);}
 }

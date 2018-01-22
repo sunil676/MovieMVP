@@ -36,4 +36,14 @@ public class LocalRepositoryImpl implements LocalRepository{
             }
         });
     }
+
+    @Override
+    public void deleteAllCMovies() {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                movieDAO.deleteAllMovies();
+            }
+        });
+    }
 }

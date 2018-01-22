@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by sunil on 20-01-2018.
  */
 
-public class AllMovieResponseModel {
+public class MovieResponseModel {
 
     private int page;
     private ArrayList<MovieEntity> results;

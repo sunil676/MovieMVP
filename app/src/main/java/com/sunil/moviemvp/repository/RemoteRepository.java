@@ -1,6 +1,6 @@
 package com.sunil.moviemvp.repository;
 
-import com.sunil.moviemvp.remote.model.AllMovieResponseModel;
+import com.sunil.moviemvp.remote.model.MovieResponseModel;
 
 import io.reactivex.Observable;
 
@@ -10,5 +10,5 @@ import io.reactivex.Observable;
 
 public interface RemoteRepository {
 
-    public Observable<AllMovieResponseModel> getMovie();
+    public Observable<MovieResponseModel> getMovie(String movieType);
 }

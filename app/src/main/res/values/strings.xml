@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">MovieMVP</string>
     <string name="grid_movie_poster">Movie Poster</string>
+
+    <string name="top_rated_movies">Top Rated</string>
+    <string name="my_favorite_movies">My Favorite Movies</string>
+
+    <string name="movie_title">Movie Title</string>
+    <string name="movie_release_date">Apr 29,2016</string>
+    <string name="movie_overview">Here, comes the movie overview</string>
+    <string name="action_settings">setting</string>
 </resources>

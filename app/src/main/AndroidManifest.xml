@@ -11,13 +11,20 @@
         android:supportsRtl="true"
         android:name=".MainApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.detail.MovieDetailActivity"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="1f04264e1b3cb739a42915f940ce893dfcf8ee1a" />
     </application>
 
 </manifest>

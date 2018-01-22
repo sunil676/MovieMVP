@@ -1,5 +1,6 @@
 package com.sunil.moviemvp.ui;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
@@ -28,11 +29,13 @@ public class MovieGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private static Context mContext;
     private static List<MovieEntity> mDatasetList;
+    private onItemClick clickListener;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MovieGridAdapter(Context context, List<MovieEntity> datasetList) {
+    public MovieGridAdapter(Context context, List<MovieEntity> datasetList, Fragment fragment) {
         mContext = context;
         mDatasetList = datasetList;
+        clickListener = (onItemClick) fragment;
     }
 
     @Override
@@ -43,7 +46,7 @@ public class MovieGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         MovieViewHolder movieHolder = (MovieViewHolder) holder;
@@ -53,6 +56,13 @@ public class MovieGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         Log.v("Adapter", "URL: "+completePosterPath);
         movieHolder.mIVThumbNail.setImageURI( Uri.parse(completePosterPath));
         movieHolder.mIVThumbNail.setVisibility(View.VISIBLE);
+
+        movieHolder.mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener.itemClick(mDatasetList.get(position));
+            }
+        });
     }
 
     @Override
@@ -75,5 +85,9 @@ public class MovieGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ButterKnife.bind(this, view);
         }
 
+    }
+
+    interface onItemClick{
+        void itemClick(MovieEntity movieEntity);
     }
 }

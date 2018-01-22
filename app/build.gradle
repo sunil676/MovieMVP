@@ -1,4 +1,19 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 
 apply plugin: 'kotlin-android'
 
@@ -53,7 +68,7 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.11'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
 
-    // lifecycler component
+    // Android component
     implementation "android.arch.lifecycle:runtime:1.0.0"
     implementation "android.arch.lifecycle:extensions:1.0.0"
     annotationProcessor "android.arch.lifecycle:compiler:1.0.0"
@@ -62,4 +77,8 @@ dependencies {
     implementation "android.arch.persistence.room:rxjava2:1.0.0"
 
     implementation 'com.facebook.fresco:fresco:1.8.0'
+    implementation 'com.miguelcatalan:materialsearchview:1.4.0'
+    compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
+        transitive = true;
+    }
 }

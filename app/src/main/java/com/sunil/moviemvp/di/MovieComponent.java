@@ -1,6 +1,5 @@
 package com.sunil.moviemvp.di;
 
-import com.sunil.moviemvp.MainActivity;
 import com.sunil.moviemvp.ui.PopularMovieFragment;
 
 import dagger.Subcomponent;

@@ -12,7 +12,7 @@ import java.util.List;
 public class MovieContract {
 
     public interface Presenter extends BaseContract.Presenter<View> {
-        void loadMovie();
+        void loadMovie(String movieTYpe);
     }
 
     public interface View extends BaseContract.View{

@@ -23,15 +23,7 @@ public interface MovieDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMovie(MovieEntity coupon);
 
+    @Query("DELETE FROM MovieEntity")
+    void deleteAllMovies();
 
-   /* @Query("SELECT * FROM Movies WHERE store = :storeIn ")
-    Maybe<MovieEntity> getCouponByStore(String storeIn);
-
-    @Query("SELECT * FROM Movies LIMIT 1")
-    Single<MovieEntity> getOneCoupon();
-
-
-
-    @Query("DELETE FROM CouponEntity")
-    void deleteAllCoupons();*/
 }

@@ -1,6 +1,7 @@
 package com.sunil.moviemvp.ui;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,6 +18,8 @@ import com.sunil.moviemvp.di.MovieModule;
 import com.sunil.moviemvp.remote.model.MovieEntity;
 import com.sunil.moviemvp.repository.LocalRepository;
 import com.sunil.moviemvp.repository.RemoteRepository;
+import com.sunil.moviemvp.ui.detail.MovieDetailActivity;
+import com.sunil.moviemvp.utils.Constant;
 
 import java.util.List;
 
@@ -29,7 +32,7 @@ import butterknife.ButterKnife;
  * Created by sunil on 20-01-2018.
  */
 
-public class PopularMovieFragment extends Fragment implements MovieContract.View{
+public class PopularMovieFragment extends Fragment implements MovieContract.View, MovieGridAdapter.onItemClick{
 
     @BindView(R.id.my_recycler_view)
     RecyclerView myRecyclerView;
@@ -44,10 +47,13 @@ public class PopularMovieFragment extends Fragment implements MovieContract.View
     @Inject
     MoviePresenter moviePresenter;
 
+    private String movieType;
 
-    public static PopularMovieFragment newInstance() {
+
+    public static PopularMovieFragment newInstance(String movieType) {
         PopularMovieFragment fragment = new PopularMovieFragment();
         Bundle args = new Bundle();
+        args.putString(Constant.Movie_Type, movieType);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,6 +68,7 @@ public class PopularMovieFragment extends Fragment implements MovieContract.View
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             Bundle arg = getArguments();
+            movieType = arg.getString(Constant.Movie_Type);
         }
 
         dependencyInject();
@@ -85,7 +92,7 @@ public class PopularMovieFragment extends Fragment implements MovieContract.View
         ButterKnife.bind(this, view);
 
         if (moviePresenter != null) {
-            moviePresenter.getMovieFromService();
+            moviePresenter.getMovieFromService(movieType);
         }else{
             Log.v("Popular Fragment", "Presenter getting null");
         }
@@ -101,14 +108,14 @@ public class PopularMovieFragment extends Fragment implements MovieContract.View
         // use a grid layout manager
         mLayoutManager = new GridLayoutManager(getActivity(), 2);
         myRecyclerView.setLayoutManager(mLayoutManager);
-        moviePresenter.loadMovie();
+        moviePresenter.loadMovie(movieType);
     }
 
     @Override
     public void onLoadMovieOk(List<MovieEntity> movieList) {
         if (movieList!= null){
             // specify an adapter
-            movieGridAdapter = new MovieGridAdapter(getActivity(), movieList);
+            movieGridAdapter = new MovieGridAdapter(getActivity(), movieList, this);
             myRecyclerView.setAdapter(movieGridAdapter);
         }
     }
@@ -127,5 +134,16 @@ public class PopularMovieFragment extends Fragment implements MovieContract.View
     public void onDestroyView() {
         super.onDestroyView();
         moviePresenter.unSubscribe();
+    }
+
+    @Override
+    public void itemClick(MovieEntity movieEntity) {
+        startDetailActivity(movieEntity);
+    }
+
+    public void startDetailActivity(MovieEntity movieEntity) {
+        Intent intent =  new Intent(getActivity(), MovieDetailActivity.class);
+        intent.putExtra(Constant.ARG_MOVIE_DETAIL, movieEntity);
+        startActivity(intent);
     }
 }

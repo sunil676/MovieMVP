@@ -7,6 +7,8 @@ Sample Movie APP in MVP design
    A library for composing asynchronous and event-based programs by using observable sequences.
 - [RxAndroid](https://github.com/ReactiveX/RxAndroid)
    Rx Android library to switching threads between very easy.
+- [Dagger2](https://github.com/google/dagger) 
+   Dagger2 Dependency Injection for injecting the instance of object easy.   
 - [MVP]
    MVP is great android architeture design with greate support of LiveData, RxJava etc.
    Why MVP? 

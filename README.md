@@ -9,6 +9,8 @@ Sample Movie APP in MVP design
    Rx Android library to switching threads between very easy.
 - [Dagger2](https://github.com/google/dagger) 
    Dagger2 Dependency Injection for injecting the instance of object easy.   
+- [Fresco](https://github.com/facebook/fresco)
+   Fresco is a powerful system for displaying images in Android applications.
 - [MVP]
    MVP is great android architeture design with greate support of LiveData, RxJava etc.
    Why MVP? 
